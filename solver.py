@@ -23,7 +23,11 @@ def solver(filename, letters):
     result = set(word_dict).intersection(perms)
 
     # sorts and prints the set of matching words
-    print sorted(result, key=len, reverse=True)
+    sort_result = sorted(result, key=len, reverse=True)
+
+    for word in sort_result:
+        print word
+
 
 
 def main():
