@@ -3,7 +3,8 @@ import re
 from itertools import permutations
 
 
-def create_dict(filename, letters):
+def solver(filename, letters):
+    # reads in words from txt file and saves to a list
     word_dict = []
     f = open(filename, 'r')
     text = f.read()
@@ -12,12 +13,16 @@ def create_dict(filename, letters):
     for word in words:
         word_dict.append(word)
 
+    # uses permutation from itertools to populate a list of every permutation from the user input
     perms = []
     for i in range(1, len(letters)+1):
         for c in permutations(letters, i):
             perms.append(''.join(c))
 
+    # uses set intersect to return a set of all matching words from permutations
     result = set(word_dict).intersection(perms)
+
+    # sorts and prints the set of matching words
     print sorted(result, key=len, reverse=True)
 
 
@@ -26,7 +31,7 @@ def main():
     if not re.match("^[a-z]{9}$", input_str):
         print "Error! Only a minimum/maximum of 9 letters ranging from a-z allowed!"
         sys.exit()
-    create_dict('words.txt', input_str)
+    solver('words.txt', input_str)
 
 
 if __name__ == '__main__':
